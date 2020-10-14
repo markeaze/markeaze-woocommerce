@@ -242,13 +242,10 @@ class Markeaze {
     } else {
       if ($order->get_status() === 'wc-cancelled') {
         $tracker->track('order_cancel', array(
-          'order_uid' => $order_id
+          'order_uid' => (string) $order_id
         ));
       } else {
-        $tracker->track('order_update', array(
-          'order_uid' => $order_id,
-          'fulfillment_status' => self::switch_state( $order->get_status() )
-        ));
+        $tracker->track('order_update', self::getOrderData($order_id));
       }
     }
   }
@@ -276,9 +273,9 @@ class Markeaze {
 
     self::updateUserInfo();
 
-    $order = self::getOrder($order_id)
+    $order = self::getOrder($order_id);
 
-    if (is_admin_bar_showing()){
+    if (is_admin_bar_showing()) {
       self::$user_id = $order->customer_user ? $order->customer_user : false;
     }
 
@@ -308,8 +305,14 @@ class Markeaze {
     if (!empty(self::$userGender)){
       $visitor['gender'] = self::$userGender;
     }
-
     do_action( 'markeaze_visitor_info', $visitor );
+
+    $tracker->set_visitor_info($visitor);
+    $tracker->track('order_create', self::getOrderData($order_id));
+  }
+
+  public static function getOrderData($order_id) {
+    $order = self::getOrder($order_id);
 
     $items = array();
     $line_items = $order->get_items( apply_filters( 'woocommerce_admin_order_item_types', 'line_item' ) );
@@ -322,26 +325,36 @@ class Markeaze {
       foreach ($line_items as $item_id => $item) {
         $pid = (!empty($item['variation_id']) && !$markeaze_plgn_options['only_product_id'])
           ? $item['variation_id'] : $item['product_id'];
-
         $price = $item['line_subtotal']
           / (float)$item['qty']
           * $markeaze_plgn_options['currency_excange_rate'];
-
-        $items[] = array(
+        $product = wc_get_product( $pid );
+        $item = array(
           'variant_id' => (string) $pid,
+          'name' => $item['name'],
           'qnt' => (float) $item['qty'],
           'price' => (float) $price
         );
+
+        if ($product) {
+          $image_url = wp_get_attachment_url( $product->get_image_id() );
+          if ($image_url) $item['main_image_url'] = (string) $image_url;
+          $item['url'] = (string) $product->get_permalink();
+        }
+
+        $items[] = $item;
       }
     }
 
-    $tracker->set_visitor_info($visitor_info);
-    $tracker->track('cart_update', array(
+    return array(
       'order_uid' => (string) $order_id,
-      'total' => $order_total,
+      'total' => (float) $order_total,
       'items' => $items,
-      'fulfillment_status' => self::switch_state( $order->get_status() )
-    ));
+      'fulfillment_status' => (string) $order->get_status(),
+      'financial_status' => $order->is_paid() ? 'paid' : 'not paid',
+      'payment_method' => (string) $order->get_payment_method(),
+      'shipping_method' => (string) $order->get_shipping_method()
+    );
   }
 
   private static function getMetaValue($order, $field) {
@@ -394,7 +407,6 @@ class Markeaze {
     if (!empty(self::$userGender)){
       $visitor['gender'] = self::$userGender;
     }
-
     do_action( 'markeaze_visitor_info', $visitor );
 
     $cart = $wc->cart->get_cart();
@@ -413,19 +425,28 @@ class Markeaze {
       foreach ($cart as $k => $v) {
         $pid = (!empty($v['variation_id']) && !$markeaze_plgn_options['only_product_id'])
           ? $v['variation_id'] : $v['product_id'];
-
         $price = $v['data']->get_price() * $markeaze_plgn_options['currency_excange_rate'];
-        $items[] = array(
+        $product =  wc_get_product($v['data']->get_id());
+        $item = array(
           'variant_id' => (string) $pid,
+          'name' => $product->get_title(),
           'qnt' => (float) $v['quantity'],
-          'price' => (float) $price,
+          'price' => (float) $price
         );
+
+        if ($product) {
+          $image_url = wp_get_attachment_url( $product->get_image_id() );
+          if ($image_url) $item['main_image_url'] = (string) $image_url;
+          $item['url'] = (string) $product->get_permalink();
+        }
+
+        $items[] = $item;
       }
     }
 
     if ($sessionCartValue != $items) {
       self::log('Cart changed: '.serialize($items));
-      $tracker->set_visitor_info($visitor_info);
+      $tracker->set_visitor_info($visitor);
       $tracker->track('cart_update', array(
         'items' => $items
       ));
@@ -449,21 +470,6 @@ class Markeaze {
     if (!empty($user_data['last_name'][0])) self::$userLastName = $user_data['last_name'][0];
     if (!empty($current_user->data->user_email)) self::$userEmail = $current_user->data->user_email;
     if (!empty($user_data['billing_phone'][0])) self::$userPhone = $user_data['billing_phone'][0];
-  }
-
-  private static function switch_state($state) {
-    switch ($state) {
-      case 'wc-on-hold':
-        $state = 'new';
-        break;
-      case 'wc-completed':
-        $state = 'shipped';
-        break;
-      case 'wc-cancelled':
-        $state = 'cancelled';
-        break;
-    }
-    return $state;
   }
 
   private static function get_params() {

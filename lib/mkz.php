@@ -100,7 +100,7 @@ class Mkz {
   }
 
   public function set_visitor_info($visitor) {
-    foreach ($visitor as $key=>$value) $this->visitor[$key] = $value;
+    foreach ($visitor as $key => $value) $this->visitor[$key] = $value;
     return $this->visitor;
   }
 
@@ -148,14 +148,14 @@ class Mkz {
   private function putLog($request, $response) {
     if (!$this->debug) return true;
     ob_start();
-    echo "REQUEST: ";
+    echo 'REQUEST: ';
     print_r($request);
-    echo "RESPONSE: ";
+    echo 'RESPONSE: ';
     print_r($response);
     $str_post = ob_get_clean();
     $date = date('Y.m.d H:i:s');
     $row = "{$date}\n{$str_post}\n";
-    $filename = dirname(__FILE__) . "/debug.log";
+    $filename = dirname(__FILE__) . '/debug.log';
     return file_put_contents($filename, $row, FILE_APPEND);
   }
 }
