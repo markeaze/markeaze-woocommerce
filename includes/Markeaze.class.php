@@ -350,9 +350,9 @@ class Markeaze {
       'order_uid' => (string) $order_id,
       'total' => (float) $order_total,
       'items' => $items,
-      'fulfillment_status' => (string) $order->get_status(),
-      'financial_status' => $order->is_paid() ? 'paid' : 'not paid',
-      'payment_method' => (string) $order->get_payment_method(),
+      'fulfillment_status' => (string) wc_get_order_status_name($order->get_status()),
+      'financial_status' => __($order->is_paid() ? 'Paid' : 'Not paid', 'markeaze'),
+      'payment_method' => (string) $order->get_payment_method_title(),
       'shipping_method' => (string) $order->get_shipping_method()
     );
   }
