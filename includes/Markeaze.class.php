@@ -240,7 +240,7 @@ class Markeaze {
     if (is_admin_bar_showing() and $date_created == $date_modified) {
       self::submitOrder($order_id);
     } else {
-      if ($order->get_status() === 'wc-cancelled') {
+      if ($order->get_status() === 'cancelled') {
         $tracker->track('order_cancel', array(
           'order_uid' => (string) $order_id
         ));
