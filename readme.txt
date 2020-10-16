@@ -64,9 +64,11 @@ Use the auto-reply function to generate answers to the most common questions, ed
 
 == Installation ==
 
-1. Install plugin from WordPress Plugin Directory or upload `Markeaze` to the `/wp-content/plugins/` directory manually.
-2. Activate plugin through the 'Plugins' menu in WordPress admin panel.
-3. Set the "App Key" field with your Markeaze account's App key in the Plugin settings.
+1. In admin panel of your WordPress store navigate to the 'Plugins' → 'Add New' section.
+2. Type in 'Markeaze' in the Search Plugins field and press Enter or download from repository.
+3. Press button 'Install Now' on the found plugin.
+4. On the 'Markeaze settings' page fill in the 'APP Key' field with your Markeaze account's 'APP key'.
+5. Press 'Save Changes' button.
 
 == Frequently Asked Questions ==
 
