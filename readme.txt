@@ -1,6 +1,6 @@
-﻿=== Markeaze ===
+﻿=== Markeaze for WooCommerce ===
 Contributors: Markeaze
-Tags: e-commerce, Markeaze, woocommerce, widgets, email campaigns, analytics
+Tags: Markeaze, e-commerce, woocommerce, widgets, email campaigns, analytics
 Requires at least: 4.2.0
 Tested up to: 5.0
 Stable tag: 1.0.0
@@ -13,46 +13,75 @@ Markeaze - Аnalytics and Actions Combined. Markeaze makes it easy to retain and
 
 == Description ==
 
-Markeaze is a marketing platform that analyzes customer behavior data, reveals bottlenecks, recommends and adjusts your marketing to optimize conversions.
+Live chat by Markeaze is an all-in-one communication solution designed specifically for the needs of online stores. Markeaze helps you improve the quality of customer service, decrease response time, and increase conversions.
 
-Upon entering an offline store, people are instantly approached by a salesperson. Otherwise they are "just looking". A good salesperson carefully pushes a customer towards the purchase – they find out the customer’s needs, get them involved in special offers, and introduce the merchandise from a positive perspective. If a customer isn’t quite ready for the purchase, the salesperson will try to get their contacts to reach out later. After the purchase, the salesperson will stay in touch and inform the client about new goods. Offline stores have learned to teach their salesperson the engagement technique, but online stores usually let the customer go.
+Markeaze combines latest trends in eCommerce such as personalization, omnichannel outreach, and automation to deliver satisfying live chat experience and enhance your customer service.
 
-Markeaze is the automatic salesperson for online stores. It will show customers the chosen special offer, ask their email and phone number, and activate an online chat at the right moment. If a client leaves the website, Markeaze will do its best to bring them back, even if the customer only spent a few moments in the shop and didn’t have a chance to say hello. As for existing clients, Markeaze will tell them about new merchandise, wish them a happy birthday, or offer them special purchase conditions.
-
-It’s not magic – Markeaze needs to be set up. But the time you spend on it will be greatly compensated by the number of new sales (without expenses on new advertisements).
-
-= Markeaze has helped online stores: =
+= Why Use Live Chat by Markeaze? =
 * Collect visitors’ contacts with widgets and form a loyal subscriber base;
-* Return abandoned carts and sell more with the help of trigger emails;
-* Chat with the most active users online, seeing the history of their actions, their preferences, and their previous messages;
-* Show promo widgets to different visitor groups and guide them to the most interesting parts of the website;
-* Send newsletters and marketing emails to stay in touch with clients and increase the number of sales;
-* Segment visitors and use analytics for even more precise tuning of marketing engagements;
-* Evaluate the results on the sales funnel, designed specifically for online stores.
+* Reduce customer support costs
+* Decrease response time
+* Increase conversion and boost sales
+* Prioritize incoming messages based on their value to the store
+* Track customer journey and behavior on your website and use this data to scale your business
+* Consult customers on active orders (availability, characteristics, price)
+* Inform customers about new products, sales, and important events
+* Provide immediate answers on warranty, returns, and utilization
+* Increase retention and launch abandoned cart email campaigns
+* Send out relevant personal recommendations
+* Conduct polls and collect feedback on the purchased products
+* Easy installation via WooCommerce
 
-Try Markeaze for free today!
+= Features and Benefits =
+
+**Smart chat prioritization and routing**
+
+Thanks to the smart chat proiritization tool your reps can manage their time more efficiently. Important chats will automatically move up the queue based on their value to the store: a customer an item in the cart will be ranked higher than the one with the active order or a new customer.
+
+**Built-in product search**
+
+Cut response time using a built-in product search function: let your reps search for products inside the chat window. Additionally, they can send beautiful product cards with an “add to cart” button to inspire a purchase. Product data is uploaded directly from WooCommerce.
+
+**Abandoned cart email campaign**
+
+Recover the revenue by winning back your customers who left your store without a purchase. Set up an automatic follow-up email that includes product cards of the abandoned cart items and a CTA button that will return your customers back to your store.
+
+**Multi-channel communication**
+
+Merge all important communication channels into a single messaging tool and use contact information and historical data to consolidate all your chats with customers. Meet your customers halfway and continue the conversation via live chat, email, Facebook Messenger, or WhatsApp.
+
+**Stay informed about cart content and active orders**
+
+By knowing the exact content of customers’ carts, your reps can process requests faster. Save time on double-checking the details and increase the level of customer satisfaction.
+
+**Track customer journey**
+
+Watch your customers typing in real-time, viewing products, updating carts, and making orders. React immediately when they are having payment issues and stay proactive anticipating your customer’s needs.
+
+**AI-generated auto-replies**
+
+Use the auto-reply function to generate answers to the most common questions, edit them when necessary, and reply to your customers in a heatbeat. Consult your website visitors on return policy, order statuses, warranty, and other popular inquires efortlessly.
 
 == Installation ==
 
 1. Install plugin from WordPress Plugin Directory or upload `Markeaze` to the `/wp-content/plugins/` directory manually.
 2. Activate plugin through the 'Plugins' menu in WordPress admin panel.
+3. Set the "App Key" field with your Markeaze account's App key in the Plugin settings.
 
 == Frequently Asked Questions ==
 
 = Do I need to register at Markeaze first to be able to use this plugin? =
-Yes, you should register at [Markeaze](http://Markeaze.com/?ref=a261ed475e2a05d4&utm_source=wordpress&utm_medium=appstore) first to obtain an APP-key.
-
-= Do you have a trial period? =
-Yes we do. You can try full-featured version of Markeaze for 14 days for free.
+Yes, you should register at [Markeaze](https://auth.markeaze.com/) first to obtain an App-key.
 
 == Screenshots ==
 
-1. Account key metrics and sales funnel.
-2. Visitors segmentation.
-3. Visitor's details and actions timeline.
-4. Widgets constructor.
-5. Email campaigns constructor.
-6. Live chat.
+1. Abandoned cart recovery.
+2. Buil-in product search.
+3. Cart content.
+4. Omnichannel outreach.
+5. Product cards.
+6. Smart chat.
+7. Sneak peek.
 
 == Changelog ==
 
