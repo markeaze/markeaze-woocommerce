@@ -4,6 +4,7 @@ class Markeaze {
 
   private static
     $initiated = false,
+    $plugin_assets_path,
     $user_id,
     $userFirstName,
     $userLastName,
@@ -16,6 +17,7 @@ class Markeaze {
 
   public static function init() {
     if (!self::$initiated ) {
+      self::$plugin_assets_path = MARKEAZE_PLUGIN_URL . 'assets/';
       self::init_hooks();
       self::$initiated = true;
       load_plugin_textdomain('markeaze', false, 'markeaze/languages');
@@ -27,13 +29,14 @@ class Markeaze {
    */
   private static function init_hooks() {
     // Calling a function add administrative menu.
+
     add_action( 'admin_menu', array('Markeaze', 'plgn_add_pages') );
 
-    if(!is_admin()) {
+    if (!is_admin()) {
       add_action( 'wp_head', array('Markeaze', 'markeaze_main') );
+      add_action( 'woocommerce_before_single_product', array('Markeaze', 'productView') );
     }
 
-    add_action( 'woocommerce_before_single_product', array('Markeaze', 'productView') );
     add_action( 'woocommerce_cart_updated', array('Markeaze', 'submitCart'));
     add_action( 'woocommerce_checkout_order_processed', array('Markeaze', 'submitOrder') );
     add_action( 'woocommerce_order_status_changed', array('Markeaze', 'stateOrder') );
@@ -48,13 +51,13 @@ class Markeaze {
   }
 
   public static function plgn_add_pages() {
-    add_submenu_page(
-      'plugins.php',
+    add_menu_page(
       __( 'Markeaze', 'markeaze' ),
-      __( 'Markeaze', 'markeaze' ),
-      'manage_options',
-      "markeaze",
-      array('Markeaze', 'plgn_settings_page')
+      __( 'Markeaze', 'markeaze' ) . (self::get_app_key() ? '' : '<span class="awaiting-mod">!</span>'),
+      'administrator',
+      'markeaze',
+      array( 'Markeaze', 'plgn_settings_page' ),
+      self::$plugin_assets_path . 'icon.svg'
     );
     // Call register settings function
     add_action( 'admin_init', array('Markeaze', 'plgn_settings') );
@@ -63,7 +66,6 @@ class Markeaze {
   public static function plgn_options_default() {
     return array(
       'markeaze_key' => '',
-      'currency_excange_rate' => '1',
       'only_product_id' => '1'
     );
   }
@@ -84,34 +86,28 @@ class Markeaze {
 
   // Function formed content of the plugin's admin page.
   public static function plgn_settings_page() {
+    global $wp_session;
+
     $markeaze_plgn_options = self::get_params();
     $markeaze_plgn_options_default = self::plgn_options_default();
-    $message = '';
-    $error = '';
+    $message = !empty($_GET['success']) ? __('Settings saved', 'markeaze') : null;
 
     if (
       isset($_REQUEST['markeaze_plgn_form_submit'])
       && check_admin_referer(plugin_basename(dirname(__DIR__)), 'markeaze_plgn_nonce_name')
     ) {
       foreach($markeaze_plgn_options_default as $k => $v) {
-        if ($k == 'currency_excange_rate') {
-          $value = trim(self::request($k, $v));
-          $value = (float)str_replace(',', '.', $value);
-          $markeaze_plgn_options[$k] = $value;
-        } else {
-          $markeaze_plgn_options[$k] = trim(self::request($k, $v));
-        }
+        $markeaze_plgn_options[$k] = trim(self::request($k, $v));
       }
 
       update_option('markeaze_plgn_options', $markeaze_plgn_options);
 
-      $message = __('Settings saved', 'markeaze');
+      exit( wp_safe_redirect( admin_url( 'admin.php?page=markeaze&success=true' ) ) );
     }
 
     $options = array(
       'markeaze_plgn_options' => $markeaze_plgn_options,
-      'message' => $message,
-      'error' => $error,
+      'message' => $message
     );
 
     echo self::loadTPL('adminform', $options);
@@ -136,8 +132,7 @@ class Markeaze {
   }
 
   public static function markeaze_main() {
-    $markeaze_plgn_options = self::get_params();
-    if (!empty($markeaze_plgn_options['markeaze_key'])) {
+    if (self::get_app_key()) {
       $visitor = array();
       $user_id = wp_get_current_user()->ID;
 
@@ -163,7 +158,7 @@ class Markeaze {
     mkz('trackPageView');
   });
 
-  mkz('appKey', '<?= $markeaze_plgn_options['markeaze_key'] ?>');
+  mkz('appKey', '<?= self::get_app_key() ?>');
 
   <?php if (count($visitor) > 0): ?>mkz('setVisitorInfo', <?= json_encode($visitor) ?>);<?php endif; ?>
 </script>
@@ -178,14 +173,14 @@ class Markeaze {
    * @throws Exception
    */
   public static function productView() {
-    $markeaze_plgn_options = self::get_params();
-    if (!empty($markeaze_plgn_options['markeaze_key'])) {
+    if (self::get_app_key()) {
       global $wp_query;
       $uri = get_permalink($wp_query->post);
       $product_cats = wp_get_post_terms( $wp_query->post->ID, 'product_cat', array('fields' => 'ids') );
       $category_id = (is_array($product_cats) && count($product_cats)) ? $product_cats[0] : 0;
       $product_id = $wp_query->post->ID;
       $product = wc_get_product($product_id);
+      $markeaze_plgn_options = self::get_params();
 
       if (!$markeaze_plgn_options['only_product_id'] && $product->get_type() == 'variable') {
         $available_variations = $product->get_available_variations();
@@ -326,8 +321,7 @@ class Markeaze {
         $pid = (!empty($item['variation_id']) && !$markeaze_plgn_options['only_product_id'])
           ? $item['variation_id'] : $item['product_id'];
         $price = $item['line_subtotal']
-          / (float)$item['qty']
-          * $markeaze_plgn_options['currency_excange_rate'];
+          / (float)$item['qty'];
         $product = wc_get_product( $pid );
         $item = array(
           'variant_id' => (string) $pid,
@@ -425,7 +419,7 @@ class Markeaze {
       foreach ($cart as $k => $v) {
         $pid = (!empty($v['variation_id']) && !$markeaze_plgn_options['only_product_id'])
           ? $v['variation_id'] : $v['product_id'];
-        $price = $v['data']->get_price() * $markeaze_plgn_options['currency_excange_rate'];
+        $price = $v['data']->get_price();
         $product =  wc_get_product($v['data']->get_id());
         $item = array(
           'variant_id' => (string) $pid,
@@ -480,10 +474,14 @@ class Markeaze {
     return $params;
   }
 
-  private static function init_tracker() {
+  private static function get_app_key() {
     $markeaze_plgn_options = self::get_params();
-    if (empty($markeaze_plgn_options['markeaze_key'])) return false;
-    $app_key = $markeaze_plgn_options['markeaze_key'];
+    return empty($markeaze_plgn_options['markeaze_key']) ? null : $markeaze_plgn_options['markeaze_key'];
+  }
+
+  private static function init_tracker() {
+    $app_key = self::get_app_key();
+    if (!$app_key) return false;
     require_once MARKEAZE_PLUGIN_DIR . 'lib/mkz.php';
     $tracker = new Mkz($app_key);
     return $tracker;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Слой_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   viewBox="0 0 160 160" style="enable-background:new 0 0 160 160;" xml:space="preserve">
+<style type="text/css">
+  .st0{clip-path:url(#SVGID_2_);}
+  .st1{fill:#FC6881;}
+  .st2{fill:#FFFFFF;}
+</style>
+<g>
+  <defs>
+    <rect id="SVGID_1_" x="34.5" width="80" height="80"/>
+  </defs>
+  <clipPath id="SVGID_2_">
+    <use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+  </clipPath>
+  <g class="st0">
+    <path class="st1" d="M34.5,40c0-6.2,0-9.3,0.4-11.9C37.2,13.9,48.4,2.7,62.6,0.4C65.2,0,68.3,0,74.5,0s9.3,0,11.9,0.4
+      c14.3,2.3,25.4,13.4,27.7,27.7c0.4,2.6,0.4,5.7,0.4,11.9v40h-40c-6.2,0-9.3,0-11.9-0.4c-14.3-2.3-25.4-13.4-27.7-27.7
+      C34.5,49.3,34.5,46.2,34.5,40z"/>
+
+      <rect x="61.2" y="26.6" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -6.4406 64.3856)" class="st2" width="26.7" height="26.7"/>
+  </g>
+</g>
+</svg>
