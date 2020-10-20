@@ -2,7 +2,7 @@
 Contributors: Markeaze
 Tags: Markeaze, e-commerce, woocommerce, widgets, email campaigns, analytics
 Requires at least: 4.2.0
-Tested up to: 5.0
+Tested up to: 5.5.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -31,6 +31,8 @@ Markeaze combines latest trends in eCommerce such as personalization, omnichanne
 * Send out relevant personal recommendations
 * Conduct polls and collect feedback on the purchased products
 * Easy installation via WooCommerce
+
+Note: This plugin transmits data from your website to an external service https://markeaze.com in accordance with the user privacy policy https://docs.markeaze.com/article/w46gc17uah-how-markeaze-complies-with-gdpr
 
 = Features and Benefits =
 
