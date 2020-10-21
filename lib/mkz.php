@@ -10,7 +10,6 @@ class Mkz {
   private $region;
   private $uid;
   private $visitor = array();
-  private $cookie_name = '_mkz_dvc_uid';
 
   public function __construct($app_key) {
     $this->set_app_key($app_key);
@@ -49,8 +48,7 @@ class Mkz {
   }
 
   private function send($event_name, $properties = [], $visitor = []) {
-    $cookie_uid = !empty($_COOKIE[$this->cookie_name]) ? $_COOKIE[$this->cookie_name] : null;
-    $uid = $this->uid ? $this->uid : $cookie_uid;
+    $uid = $this->uid;
     $merged_visitor = array_merge($this->visitor, $visitor);
 
     if (empty($uid) && empty($merged_visitor['client_id'])) throw new Exception('No user id specified');

@@ -484,6 +484,8 @@ class Markeaze {
     if (!$app_key) return false;
     require_once MARKEAZE_PLUGIN_DIR . 'lib/mkz.php';
     $tracker = new Mkz($app_key);
+    $cookie_uid = !empty($_COOKIE['_mkz_dvc_uid']) ? sanitize_key($_COOKIE['_mkz_dvc_uid']) : null;
+    $tracker->set_device_uid($cookie_uid);
     return $tracker;
   }
 
