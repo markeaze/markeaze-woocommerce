@@ -1,5 +1,11 @@
 <?php
 
+/*
+MIT License
+
+Copyright (c) Markeaze Inc. https://markeaze.com
+*/
+
 class Mkz {
   public $debug = false;
   public $version = '1.0.0';

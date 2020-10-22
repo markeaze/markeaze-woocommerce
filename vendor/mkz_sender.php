@@ -1,5 +1,11 @@
 <?php
 
+/*
+MIT License
+
+Copyright (c) Markeaze Inc. https://markeaze.com
+*/
+
 class MkzSender {
 
   public function __construct($url) {

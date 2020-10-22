@@ -482,7 +482,7 @@ class Markeaze {
   private static function init_tracker() {
     $app_key = self::get_app_key();
     if (!$app_key) return false;
-    require_once MARKEAZE_PLUGIN_DIR . 'lib/mkz.php';
+    require_once MARKEAZE_PLUGIN_DIR . 'vendor/mkz.php';
     $tracker = new Mkz($app_key);
     $cookie_uid = !empty($_COOKIE['_mkz_dvc_uid']) ? sanitize_key($_COOKIE['_mkz_dvc_uid']) : null;
     $tracker->set_device_uid($cookie_uid);
