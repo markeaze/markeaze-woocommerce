@@ -9,7 +9,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.2
 Donate link: http://markeaze.com/
 
-Markeaze - Аnalytics and Actions Combined. Markeaze makes it easy to retain and return customers for eCommerce. Supports WooCommerce 2.x.
+Live chat by Markeaze is an all-in-one communication solution designed specifically for the needs of online stores.
 
 == Description ==
 
