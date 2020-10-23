@@ -4,6 +4,11 @@
 MIT License
 
 Copyright (c) Markeaze Inc. https://markeaze.com
+
+This file is part of the markeaze-php-tracker library created by Markeaze.
+
+Repository: https://github.com/markeaze/markeaze-php-tracker
+Documentation: https://github.com/markeaze/markeaze-php-tracker/blob/master/README.md
 */
 
 class Mkz {
@@ -16,6 +21,7 @@ class Mkz {
   private $region;
   private $uid;
   private $visitor = array();
+  private $cookie_name = '_mkz_dvc_uid';
 
   public function __construct($app_key) {
     $this->set_app_key($app_key);
@@ -54,7 +60,8 @@ class Mkz {
   }
 
   private function send($event_name, $properties = [], $visitor = []) {
-    $uid = $this->uid;
+    $cookie_uid = !empty($_COOKIE[$this->cookie_name]) ? stripslashes($_COOKIE[$this->cookie_name]) : null;
+    $uid = $this->uid ? $this->uid : $cookie_uid;
     $merged_visitor = array_merge($this->visitor, $visitor);
 
     if (empty($uid) && empty($merged_visitor['client_id'])) throw new Exception('No user id specified');
@@ -66,11 +73,9 @@ class Mkz {
     $data['tracker_name'] = $this->tracker_name;
     $data['performed_at'] = time();
 
-    // visitor
     $data['visitor'] = $merged_visitor;
     if ($uid) $data['visitor']['device_uid'] = $uid;
 
-    // event properties
     if (count($properties) > 0) $data['properties'] = $properties;
 
     $this->post_data = $data;

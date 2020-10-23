@@ -1,3 +1,17 @@
+<?php
+
+/*
+
+Copyright (c) Markeaze Inc. https://markeaze.com
+
+This file is part of the markeaze-for-woocommerce plugin created by Markeaze.
+
+Repository: https://github.com/markeaze/markeaze-woocommerce
+Documentation: https://github.com/markeaze/markeaze-woocommerce/blob/master/README.md
+
+*/
+
+?>
 <div class="wrap">
   <div class="icon32" id="icon-options-general"></div>
   <h2><?php esc_html_e('Markeaze Settings', 'markeaze') ?></h2>

@@ -4,6 +4,12 @@
 MIT License
 
 Copyright (c) Markeaze Inc. https://markeaze.com
+
+This file is part of the markeaze-php-tracker library created by Markeaze, adapted for Wordpress requirements.
+Original file: https://github.com/markeaze/markeaze-php-tracker/blob/master/mkz_sender.php
+
+Repository: https://github.com/markeaze/markeaze-php-tracker
+Documentation: https://github.com/markeaze/markeaze-php-tracker/blob/master/README.md
 */
 
 class MkzSender {

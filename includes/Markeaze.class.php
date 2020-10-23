@@ -1,5 +1,16 @@
 <?php
 
+/*
+
+Copyright (c) Markeaze Inc. https://markeaze.com
+
+This file is part of the markeaze-for-woocommerce plugin created by Markeaze.
+
+Repository: https://github.com/markeaze/markeaze-woocommerce
+Documentation: https://github.com/markeaze/markeaze-woocommerce/blob/master/README.md
+
+*/
+
 class Markeaze {
 
   private static
@@ -484,8 +495,6 @@ class Markeaze {
     if (!$app_key) return false;
     require_once MARKEAZE_PLUGIN_DIR . 'vendor/mkz.php';
     $tracker = new Mkz($app_key);
-    $cookie_uid = !empty($_COOKIE['_mkz_dvc_uid']) ? sanitize_key($_COOKIE['_mkz_dvc_uid']) : null;
-    $tracker->set_device_uid($cookie_uid);
     return $tracker;
   }
 
