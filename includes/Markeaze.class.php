@@ -35,6 +35,10 @@ class Markeaze {
     }
   }
 
+  public static function activated_action_handler( ) {
+    exit( wp_safe_redirect( admin_url( 'admin.php?page=markeaze' ) ) );
+  }
+
   /**
    * Initializes WordPress hooks
    */

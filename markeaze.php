@@ -33,12 +33,9 @@ Documentation: https://github.com/markeaze/markeaze-woocommerce/blob/master/READ
 define( 'MARKEAZE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'MARKEAZE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
-function plugin_activated_action_handler( ) {
-  exit( wp_safe_redirect( admin_url( 'admin.php?page=markeaze' ) ) );
-}
-add_action( 'activated_plugin', 'plugin_activated_action_handler' );
-
 require_once (MARKEAZE_PLUGIN_DIR . 'includes/Markeaze.class.php');
 
 add_action( 'init', array( 'Markeaze', 'init' ) );
+add_action( 'activated_plugin', array( 'Markeaze', 'activated_action_handler') );
+
 load_plugin_textdomain( 'markeaze', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
