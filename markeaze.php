@@ -2,7 +2,7 @@
 /*
 Plugin Name: Markeaze
 Description: Markeaze helps you improve the quality of customer service, decrease response time, and increase conversions.
-Version: 1.0.0
+Version: 1.0.1
 Author: Markeaze
 Author URI: https://markeaze.com
 */

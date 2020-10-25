@@ -35,8 +35,11 @@ class Markeaze {
     }
   }
 
-  public static function activated_action_handler( ) {
-    exit( wp_safe_redirect( admin_url( 'admin.php?page=markeaze' ) ) );
+  public static function activated_action_handler($plugin) {
+    $name = plugin_basename( trim($plugin) );
+  	if ($name == 'markeaze/markeaze.php') {
+  	  exit( wp_safe_redirect( admin_url( 'admin.php?page=markeaze' ) ) );
+  	}
   }
 
   /**

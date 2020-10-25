@@ -3,7 +3,7 @@ Contributors: Markeaze
 Tags: Markeaze, e-commerce, woocommerce, widgets, email campaigns, analytics
 Requires at least: 4.2.0
 Tested up to: 5.5.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.2
@@ -88,6 +88,9 @@ Yes, you should register at [Markeaze](https://auth.markeaze.com/) first to obta
 7. Sneak peek.
 
 == Changelog ==
+
+= 1.0 =
+Fix redirect after install.
 
 = 1.0 =
 Initial release.
