@@ -7,7 +7,7 @@ Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.2
-Donate link: http://markeaze.com/
+Donate link: http://markeaze.com/?utm_source=opencart&utm_medium=referral&utm_campaign=Opencart_plugin
 
 Live chat by Markeaze is an all-in-one communication solution designed specifically for the needs of online stores.
 
@@ -75,7 +75,7 @@ Use the auto-reply function to generate answers to the most common questions, ed
 == Frequently Asked Questions ==
 
 = Do I need to register at Markeaze first to be able to use this plugin? =
-Yes, you should register at [Markeaze](https://auth.markeaze.com/) first to obtain an App-key.
+Yes, you should register at [Markeaze](https://auth.markeaze.com/?utm_source=opencart&utm_medium=referral&utm_campaign=Opencart_plugin) first to obtain an App-key.
 
 == Screenshots ==
 

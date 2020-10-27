@@ -62,7 +62,7 @@ Documentation: https://github.com/markeaze/markeaze-woocommerce/blob/master/READ
 
       <input type="hidden" name="markeaze_plgn_form_submit" value="submit" />
       <input type="submit" class="button-primary" value="<?= _e('Save Changes') ?>" />
-      <a class="button-secondary" href="https://auth.markeaze.com" target="_blank">
+      <a class="button-secondary" href="https://auth.markeaze.com?utm_source=opencart&utm_medium=referral&utm_campaign=Opencart_plugin" target="_blank">
         <?php esc_html_e('Go to Markeaze account', 'markeaze') ?>
       </a>
 
